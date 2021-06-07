@@ -22,6 +22,10 @@
 
     .selected-files-list {
         list-style-type: disc;
+
+        li {
+            margin-left: 25px;
+        }
         
         p {
             vertical-align: middle;

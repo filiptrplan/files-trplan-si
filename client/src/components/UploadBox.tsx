@@ -27,6 +27,11 @@ export class UploadBox extends React.PureComponent<UploadBoxProps> {
         <button onClick={() => this.onDeleteClick(file)} className="btn is-danger delete-button">X</button>
       </li>)
     });
+    if(fileElements.length === 0) {
+      fileElements.push(
+        <p>No files selected.</p>
+      );
+    }
 
     return (
       <div className="upload-box-container">

@@ -5,8 +5,8 @@ import {
   NavLink,
   Switch
 } from "react-router-dom";
-import { Files } from './pages/Files';
-import { Home } from "./pages/Home";
+import { Files } from './Files';
+import { Home } from "./Home";
 import './styles/app.scss';
 
 interface AppProps { }
@@ -32,7 +32,7 @@ class App extends React.PureComponent<AppProps> {
               </li>
             </ul>
           </nav>
-          <div className="content container">
+          <div className="main-container">
             <Switch>
               <Route exact path="/" component={Home}>
               </Route>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Dropzone from 'react-dropzone';
-import {FileListItem} from './FileListItem';
+import { SelectedFileList } from './SelectedFileList';
 
 interface UploadBoxProps {
   selectedFiles: File[],
@@ -20,18 +20,6 @@ export const UploadBox: React.FC<UploadBoxProps> = (props) => {
     props.onFilesChange(newFiles);
   }
 
-  let fileElements = Array<JSX.Element>();
-  props.selectedFiles.forEach((file) => {
-    fileElements.push(<FileListItem
-      file={file}
-      onDelete={(file) => onDelete(file)}
-    ></FileListItem>)
-  });
-  if (fileElements.length === 0) {
-    fileElements.push(
-      <p>No files selected.</p>
-    );
-  }
 
   return (
     <div>
@@ -47,9 +35,10 @@ export const UploadBox: React.FC<UploadBoxProps> = (props) => {
           )}
         </Dropzone>
         <p className="selected-files-label">Selected files:</p>
-        <ul className="selected-files-list">
-          {fileElements}
-        </ul>
+        <SelectedFileList
+          selectedFiles={props.selectedFiles}
+          onDelete={onDelete}
+        ></SelectedFileList>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ interface FileListItemProps {
   onDelete: (file: File) => void
 }
 
-export default function FileListItem(props: FileListItemProps) {
+export const FileListItem: React.FC<FileListItemProps> = (props) => {
   return (
     <li key={props.file.name}>
       <p>{props.file.name}</p>

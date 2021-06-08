@@ -1,42 +1,42 @@
-import * as React from 'react'
+import React from 'react'
 import Dropzone from 'react-dropzone';
-import FileListItem from './FileListItem';
+import {FileListItem} from './FileListItem';
 
 interface UploadBoxProps {
   selectedFiles: File[],
   onFilesChange: (files: File[]) => void
 };
 
-export class UploadBox extends React.PureComponent<UploadBoxProps> {
-  onDrop(acceptedFiles: File[]) {
-    this.props.onFilesChange(acceptedFiles);
+export const UploadBox: React.FC<UploadBoxProps> = (props) => {
+  const onDrop = (acceptedFiles: File[]) => {
+    props.onFilesChange(acceptedFiles);
   }
 
-  onDeleteClick(file: File) {
-    let newFiles = [...this.props.selectedFiles];
+  const onDelete = (file: File) => {
+    let newFiles = [...props.selectedFiles];
     newFiles = newFiles.filter((value) => {
       return value !== file;
     })
-    this.props.onFilesChange(newFiles);
+    props.onFilesChange(newFiles);
   }
 
-  render() {
-    let fileElements = Array<JSX.Element>();
-    this.props.selectedFiles.forEach((file) => {
-      fileElements.push(<FileListItem
-        file={file}
-        onDelete={(file) => this.onDeleteClick(file)}
-      ></FileListItem>)
-    });
-    if (fileElements.length === 0) {
-      fileElements.push(
-        <p>No files selected.</p>
-      );
-    }
+  let fileElements = Array<JSX.Element>();
+  props.selectedFiles.forEach((file) => {
+    fileElements.push(<FileListItem
+      file={file}
+      onDelete={(file) => onDelete(file)}
+    ></FileListItem>)
+  });
+  if (fileElements.length === 0) {
+    fileElements.push(
+      <p>No files selected.</p>
+    );
+  }
 
-    return (
+  return (
+    <div>
       <div className="upload-box-container">
-        <Dropzone onDrop={acceptedFiles => this.onDrop(acceptedFiles)} multiple={true} >
+        <Dropzone onDrop={acceptedFiles => onDrop(acceptedFiles)} multiple={true} >
           {({ getRootProps, getInputProps }) => (
             <section>
               <div className="upload-box" {...getRootProps()}>
@@ -51,6 +51,6 @@ export class UploadBox extends React.PureComponent<UploadBoxProps> {
           {fileElements}
         </ul>
       </div>
-    );
-  }
+    </div>
+  )
 }

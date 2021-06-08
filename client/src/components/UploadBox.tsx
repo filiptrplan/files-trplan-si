@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Dropzone from 'react-dropzone';
+import FileListItem from './FileListItem';
 
 interface UploadBoxProps {
   selectedFiles: File[],
@@ -22,12 +23,12 @@ export class UploadBox extends React.PureComponent<UploadBoxProps> {
   render() {
     let fileElements = Array<JSX.Element>();
     this.props.selectedFiles.forEach((file) => {
-      fileElements.push(<li key={file.name}>
-        <p>{file.name}</p>
-        <button onClick={() => this.onDeleteClick(file)} className="btn is-danger delete-button">X</button>
-      </li>)
+      fileElements.push(<FileListItem
+        file={file}
+        onDelete={(file) => this.onDeleteClick(file)}
+      ></FileListItem>)
     });
-    if(fileElements.length === 0) {
+    if (fileElements.length === 0) {
       fileElements.push(
         <p>No files selected.</p>
       );

@@ -1,6 +1,6 @@
 import React from 'react'
 import { UploadBox } from './components/UploadBox';
-import { UploadButton } from './components/UploadButton';
+import UploadButton from './components/UploadButton';
 
 interface HomeState {
   selectedFiles: File[]
